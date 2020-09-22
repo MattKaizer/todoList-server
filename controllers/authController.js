@@ -14,7 +14,7 @@ exports.authUser = async (req, res) => {
 
     try {
         // if register user
-        let user = User.findOne({ email });
+        let user = await User.findOne({ email });
         if (!user) {
             return res.status(400).json({ msg: 'El usuario no existe' });
         }
