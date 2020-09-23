@@ -16,4 +16,10 @@ router.post('/',
     taskController.createTask
 );
 
+// /api/tasks - get all task
+router.get('/',
+    auth,
+    taskController.getTasks
+)
+
 module.exports = router;
