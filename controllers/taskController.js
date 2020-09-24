@@ -57,3 +57,40 @@ exports.getTasks = async (req, res) => {
     }
 
 }
+
+exports.updateTask = async (req, res) => {
+    // check errors
+    const errors = await validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({errors:errors.array()})
+    }
+
+    try {
+        const { project, name, state } = req.body;
+
+        
+        // check if task exist
+        const existentTask = await Task.findById(req.params.id);
+        if (!existentTask) {
+            res.status(404).json({msg: 'No existe la tarea.'})
+        }
+        
+        // check project owner
+        const existentProject = await Projects.findById(project);
+        if (existentProject.author.toString() !== req.user.id) {
+            res.status(401).json({msg: 'No autorizado'});
+        }
+        const newTask = {};
+        if(name) {
+            newTask.name = name;
+        }
+        if(state) {
+            newTask.state = state;
+        }
+        // save Task
+        existentTask = await Task.findOneAndUpdate({ _id: req.params.id }, {$set: newTask }, {new: true} );
+    } catch (error) {
+        console.log(error);
+        res.status(500).send('Hubo un error');           
+    }
+}
