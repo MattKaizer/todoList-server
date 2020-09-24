@@ -1,9 +1,11 @@
 const express = require('express');
 const dbConnect = require('./config/db');
+const cors = require('cors');
 
 const app = express(); //creating server
 dbConnect(); //connecting to db
-
+// enable cors
+app.use(cors());
 //enable express.json
 app.use(express.json({ extended: true }));
 
