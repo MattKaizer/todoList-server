@@ -25,10 +25,16 @@ router.get('/',
 // update
 router.put('/:id', 
     auth,
-    [
-        check('name', 'El nombre de la tarea es obligatorio.').notEmpty()
-    ],
+    // [
+    //     check('name', 'El nombre de la tarea es obligatorio.').notEmpty()
+    // ],
     taskController.updateTask
+)
+
+// delete
+router.delete('/:id',
+    auth,
+    taskController.deleteTask
 )
 
 module.exports = router;
