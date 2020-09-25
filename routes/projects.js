@@ -22,7 +22,7 @@ router.get('/',
 router.put('/:id',
     auth,
     [
-        check('name', 'El nombre del proyecto es obligatorio.').notEmpty()
+        check('projectName', 'El nombre del proyecto es obligatorio.').notEmpty()
     ],
     projectController.updateProject
 );
