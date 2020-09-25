@@ -16,7 +16,7 @@ exports.createProject = async (req, res) => {
         project.author = req.user.id;
         // save project
         project.save();
-        res.json(project);
+        res.json({project});
         
     } catch (error) {
         console.log(error)
@@ -45,10 +45,10 @@ exports.updateProject = async (req, res) => {
     }
 
     // extract info
-    const { name } = req.body;
+    const { projectName } = req.body;
     const newProject = {};
-    if(name) {
-        newProject.name = name;
+    if(projectName) {
+        newProject.projectName = projectName;
     }
 
     try {
