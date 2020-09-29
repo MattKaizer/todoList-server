@@ -70,8 +70,8 @@ exports.updateTask = async (req, res) => {
 
         
         // check if task exist
-        let existentTask = await Task.findById(req.params.id);
-        if (!existentTask) {
+        let task = await Task.findById(req.params.id);
+        if (!task) {
             res.status(404).json({msg: 'No existe la tarea.'})
         }
         
@@ -88,8 +88,8 @@ exports.updateTask = async (req, res) => {
             newTask.state = state;
         }
         // save Task
-        existentTask = await Task.findOneAndUpdate({ _id: req.params.id }, {$set: newTask }, {new: true} );
-        res.json({updated_task: existentTask});
+        task = await Task.findOneAndUpdate({ _id: req.params.id }, {$set: newTask }, {new: true} );
+        res.json({task});
     } catch (error) {
         console.log(error);
         res.status(500).send('Hubo un error');           
@@ -104,7 +104,7 @@ exports.deleteTask = async (req, res) => {
         }
     
         try {
-            const { project, name, state } = req.body;
+            const { project, name, state } = req.query;
     
             
             // check if task exist
