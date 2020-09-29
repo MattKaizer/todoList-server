@@ -84,9 +84,7 @@ exports.updateTask = async (req, res) => {
         if(name) {
             newTask.name = name;
         }
-        if(state) {
-            newTask.state = state;
-        }
+        newTask.state = state;
         // save Task
         task = await Task.findOneAndUpdate({ _id: req.params.id }, {$set: newTask }, {new: true} );
         res.json({task});
