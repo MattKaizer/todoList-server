@@ -25,9 +25,6 @@ router.get('/',
 // update
 router.put('/:id', 
     auth,
-    // [
-    //     check('name', 'El nombre de la tarea es obligatorio.').notEmpty()
-    // ],
     taskController.updateTask
 )
 
