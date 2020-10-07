@@ -9,7 +9,7 @@ app.use(cors());
 //enable express.json
 app.use(express.json({ extended: true }));
 
-const port = process.env.port || 4000;
+// const port = process.env.port || 4000;
 
 //import routes
 app.use('/api/users', require('./routes/users'));
@@ -17,6 +17,7 @@ app.use('/api/auth', require('./routes/auth'));
 app.use('/api/projects', require('./routes/projects'));
 app.use('/api/tasks', require('./routes/tasks'));
 
-app.listen(port, '0.0.0.0', () => {
+const server = app.listen(process.env.PORT || 4000, () => {
+    const port = server.address().port;
     console.log(`ITs Alive! the demon its alive on port: ${port}`)
 });
