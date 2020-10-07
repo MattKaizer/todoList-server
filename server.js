@@ -17,6 +17,7 @@ app.use('/api/auth', require('./routes/auth'));
 app.use('/api/projects', require('./routes/projects'));
 app.use('/api/tasks', require('./routes/tasks'));
 
-app.listen(port, '0.0.0.0', () => {
-    console.log(`ITs Alive! the demon its alive on port: ${port}`)
+app.listen('0.0.0.0', () => {
+    console.log(`ITs Alive! the demon its alive!!`)
+    // console.log(`ITs Alive! the demon its alive on port: ${port}`)
 });
